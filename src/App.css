@@ -1,10 +1,16 @@
-@import '~antd/dist/antd.css';
-@import './font/font.css';
+@import "~antd/dist/antd.css";
+@import "./font/font.css";
 
 body {
-  font-family: HYWenHei-65W, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
-    Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-    'Noto Color Emoji';
+  font-family: HYWenHei-65W, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  background: url("https://piwigo.stsecurity.moe/i.php?/upload/2022/11/05/20221105030852-1b6e4080-xx.jpg")
+    no-repeat center center / cover fixed !important;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .ant-layout {
@@ -35,7 +41,7 @@ body {
   overflow: hidden;
   background: #6faaca;
   background: linear-gradient(0deg, #6faaca 0%, #697b9b 100%);
-  background: url('./resource/rarity_3_background.png') no-repeat left top/cover;
+  background: url("./resource/rarity_3_background.png") no-repeat left top/cover;
 }
 
 .rarity-4 {
@@ -44,7 +50,7 @@ body {
   overflow: hidden;
   background: #917ab1;
   background: linear-gradient(0deg, #917ab1 0%, #6c6192 100%);
-  background: url('./resource/rarity_4_background.png') no-repeat left top/cover;
+  background: url("./resource/rarity_4_background.png") no-repeat left top/cover;
 }
 
 .rarity-5 {
@@ -53,5 +59,5 @@ body {
   overflow: hidden;
   background: #9a6d43;
   background: linear-gradient(0deg, #de9552 0%, #9a6d43 100%);
-  background: url('./resource/rarity_5_background.png') no-repeat left top/cover;
+  background: url("./resource/rarity_5_background.png") no-repeat left top/cover;
 }
