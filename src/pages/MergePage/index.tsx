@@ -1,13 +1,13 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { FC, useCallback, useMemo, useState } from 'react';
-import { Button, Upload, Alert } from 'antd';
-import { RcFile } from 'antd/lib/upload';
-import UploadOutlined from '@ant-design/icons/UploadOutlined';
-import { FriendLinks } from 'components/FriendLinks';
-import { parseExcel, parseJson } from 'parser';
-import { UploadItem, UploadItemProps } from './UploadItem';
-import MergeShow from './MergeShow';
+import { css } from "@emotion/react";
+import { FC, useCallback, useMemo, useState } from "react";
+import { Button, Upload, Alert } from "antd";
+import { RcFile } from "antd/lib/upload";
+import UploadOutlined from "@ant-design/icons/UploadOutlined";
+import { FriendLinks } from "components/FriendLinks";
+import { parseExcel, parseJson } from "parser";
+import { UploadItem, UploadItemProps } from "./UploadItem";
+import MergeShow from "./MergeShow";
 
 type MergePageProps = {};
 
@@ -28,23 +28,23 @@ export const MergePage: FC<MergePageProps> = function ({}) {
   const handleBeforeUpload = useCallback((file: RcFile, fileList: any) => {
     const data = {
       file,
-      message: '',
-      type: 'error',
+      message: "",
+      type: "error",
     } as UploadItemProps;
     const addToList = (item: any) => {
       setDataList((v) => v.concat(item));
     };
-    const isXlsx = file.name.endsWith('.xlsx');
-    const isJson = file.name.endsWith('.json');
+    const isXlsx = file.name.endsWith(".xlsx");
+    const isJson = file.name.endsWith(".json");
 
     const getErrorMessage = (e: any) => {
-      if (typeof e === 'string') return e;
-      if (typeof e === 'object' && 'message' in e) return e.message;
-      return '未知错误';
+      if (typeof e === "string") return e;
+      if (typeof e === "object" && "message" in e) return e.message;
+      return "未知错误";
     };
 
     if (!isXlsx && !isJson) {
-      data.message = '文件类型错误，请上传 xlsx 文件或 json 文件';
+      data.message = "文件类型错误，请上传 xlsx 文件或 json 文件";
       addToList(data);
     } else {
       if (isXlsx) {
@@ -55,7 +55,7 @@ export const MergePage: FC<MergePageProps> = function ({}) {
           })
           .then((values) => {
             data.data = values;
-            data.type = 'success';
+            data.type = "success";
             addToList(data);
           })
           .catch((e) => {
@@ -69,7 +69,7 @@ export const MergePage: FC<MergePageProps> = function ({}) {
             const json = JSON.parse(str);
             const parsedData = parseJson(json);
             data.data = parsedData;
-            data.type = 'success';
+            data.type = "success";
             addToList(data);
           })
           .catch((e) => {
@@ -89,7 +89,7 @@ export const MergePage: FC<MergePageProps> = function ({}) {
       _dataList.splice(index, 1);
       setDataList(_dataList);
     },
-    [dataList],
+    [dataList]
   );
   return (
     <div
@@ -98,7 +98,7 @@ export const MergePage: FC<MergePageProps> = function ({}) {
       `}
     >
       <div
-        className='ant-alert-info'
+        className="ant-alert-info"
         css={css`
           width: 100%;
           display: flex;
@@ -108,21 +108,21 @@ export const MergePage: FC<MergePageProps> = function ({}) {
         `}
       >
         <Alert
-          message={'部分手机浏览器可能不支持导出Excel文件'}
-          type='info'
+          message={"部分手机浏览器可能不支持导出Excel文件"}
+          type="info"
           showIcon={false}
           banner
         />
       </div>
       <div css={WrapperStyle}>
         <Upload
-          name='file'
-          accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx, .json'
+          name="file"
+          accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx, .json"
           multiple={true}
           beforeUpload={handleBeforeUpload}
           showUploadList={false}
         >
-          <Button icon={<UploadOutlined />} type='primary'>
+          <Button icon={<UploadOutlined />} type="primary">
             导入 xlsx 文件或 json 文件
           </Button>
         </Upload>
@@ -143,18 +143,18 @@ export const MergePage: FC<MergePageProps> = function ({}) {
             <div>
               此网站是静态网站，你的文件不会被上传到网站后台，具体代码请查看
               <Button
-                type='link'
-                href='https://github.com/voderl/genshin-gacha-analyzer'
-                target='_blank'
+                type="link"
+                href="https://github.com/stsecurity/genshin-gacha-analyzer"
+                target="_blank"
               >
                 github链接
               </Button>
             </div>
           }
-          type='warning'
+          type="warning"
           showIcon
         />
-        <FriendLinks mode='bottom' visible />
+        <FriendLinks mode="bottom" visible />
       </div>
     </div>
   );

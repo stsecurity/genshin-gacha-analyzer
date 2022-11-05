@@ -1,20 +1,20 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { Button, Divider } from 'antd';
-import { useCacheContext } from 'context/CacheContext';
-import { FC, useCallback, useMemo } from 'react';
-import DownloadOutlined from '@ant-design/icons/DownloadOutlined';
-import { DataItem } from 'types';
-import { PoolAnalysis } from './PoolAnalysis';
-import { renderToCanvas } from './renderToCanvas';
-import { ISMOBILE, POOL_TYPES } from 'const';
-import { useGlobalContext } from 'context/GlobalContext';
-import { IconButton } from 'components/IconButton';
-import { FriendLinks } from 'components/FriendLinks';
-import WordCloudCharts from './WordCloudCharts';
-import renderPngTip from 'utils/renderPngTip';
-import downloadCanvas from 'utils/downloadCanvas';
-import { BackAndCopy } from 'components/BackAndCopy';
+import { css } from "@emotion/react";
+import { Button, Divider } from "antd";
+import { useCacheContext } from "context/CacheContext";
+import { FC, useCallback, useMemo } from "react";
+import DownloadOutlined from "@ant-design/icons/DownloadOutlined";
+import { DataItem } from "types";
+import { PoolAnalysis } from "./PoolAnalysis";
+import { renderToCanvas } from "./renderToCanvas";
+import { ISMOBILE, POOL_TYPES } from "const";
+import { useGlobalContext } from "context/GlobalContext";
+import { IconButton } from "components/IconButton";
+import { FriendLinks } from "components/FriendLinks";
+import WordCloudCharts from "./WordCloudCharts";
+import renderPngTip from "utils/renderPngTip";
+import downloadCanvas from "utils/downloadCanvas";
+import { BackAndCopy } from "components/BackAndCopy";
 
 interface AnalysisChartProps {}
 
@@ -23,7 +23,9 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
   const { isVertical, parsedData } = useGlobalContext();
 
   const validSheetKeys = useMemo(() => {
-    return POOL_TYPES.filter((sheetKey) => parsedData[sheetKey] && parsedData[sheetKey].length > 0);
+    return POOL_TYPES.filter(
+      (sheetKey) => parsedData[sheetKey] && parsedData[sheetKey].length > 0
+    );
   }, [parsedData]);
 
   const handleRenderPng = useCallback(() => {
@@ -32,8 +34,8 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
         validSheetKeys.map((key: string) => localCache[key]),
         isVertical,
         (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
-          downloadCanvas(canvas, 'charts.png', resolve);
-        },
+          downloadCanvas(canvas, "charts.png", resolve);
+        }
       );
     });
   }, [isVertical]);
@@ -43,7 +45,10 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
       <Divider>
         <span>
           此页面参考自：
-          <a target='_blank' href='https://github.com/biuuu/genshin-gacha-export'>
+          <a
+            target="_blank"
+            href="https://github.com/biuuu/genshin-gacha-export"
+          >
             github链接
           </a>
         </span>
@@ -57,11 +62,11 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
           `}
         >
           <Button
-            type='primary'
+            type="primary"
             onClick={handleRenderPng}
             icon={<DownloadOutlined />}
-            size='middle'
-            shape='circle'
+            size="middle"
+            shape="circle"
           />
         </div>
       ) : (
@@ -75,8 +80,8 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
           <IconButton
             icon={<DownloadOutlined />}
             onClick={handleRenderPng}
-            tip='生成图片'
-            placement='left'
+            tip="生成图片"
+            placement="left"
           />
         </div>
       )}
@@ -88,7 +93,9 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
       >
         {validSheetKeys
           .map((key, index) => {
-            return <PoolAnalysis poolType={key} data={parsedData[key]} key={key} />;
+            return (
+              <PoolAnalysis poolType={key} data={parsedData[key]} key={key} />
+            );
           })
           .filter((v) => !!v)}
       </div>
@@ -98,12 +105,17 @@ export const AnalysisChart: FC<AnalysisChartProps> = ({}) => {
           margin-bottom: 48px;
         `}
       >
-        <Button type='primary' onClick={handleRenderPng} icon={<DownloadOutlined />} size='middle'>
+        <Button
+          type="primary"
+          onClick={handleRenderPng}
+          icon={<DownloadOutlined />}
+          size="middle"
+        >
           生成图片
         </Button>
       </div>
       <WordCloudCharts />
-      <FriendLinks mode='bottom' />
+      <FriendLinks mode="bottom" />
     </div>
   );
 };

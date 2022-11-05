@@ -1,12 +1,12 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { Tooltip, TooltipProps } from 'antd';
-import { FONT_FAMILY } from 'const';
-import { useGlobalContext } from 'context/GlobalContext';
-import { FC } from 'react';
+import { css } from "@emotion/react";
+import { Tooltip, TooltipProps } from "antd";
+import { FONT_FAMILY } from "const";
+import { useGlobalContext } from "context/GlobalContext";
+import { FC } from "react";
 
 interface FriendLinksProps {
-  mode: 'left' | 'bottom';
+  mode: "left" | "bottom";
   visible?: boolean;
 }
 
@@ -18,9 +18,9 @@ type LinkType = {
 
 const Links: LinkType[] = [
   {
-    title: '可莉特调',
-    link: 'https://genshin.pub/',
-    tip: '一些很好用的原神工具~',
+    title: "Github repo",
+    link: "https://github.com/stsecurity/genshin-gacha-analyzer",
+    tip: "Github repo",
   },
 ];
 const EllipsisStyle = css`
@@ -32,7 +32,7 @@ const Separator = () => <>/</>;
 export const FriendLinks: FC<FriendLinksProps> = ({ mode, visible }) => {
   const { isVertical } = useGlobalContext();
   if (visible === false) return <></>;
-  if (mode === 'bottom') {
+  if (mode === "bottom") {
     if (!isVertical && visible !== true) return <></>;
     return (
       <div
@@ -53,12 +53,12 @@ export const FriendLinks: FC<FriendLinksProps> = ({ mode, visible }) => {
                 padding: 8px 12px;
               `}
             >
-              <Tooltip title={tip} placement='top'>
-                <a target='_blank' href={link}>
+              <Tooltip title={tip} placement="top">
+                <a target="_blank" href={link}>
                   {title}
                 </a>
               </Tooltip>
-            </span>,
+            </span>
           );
           acc.push(<Separator />);
           return acc;
@@ -84,8 +84,8 @@ export const FriendLinks: FC<FriendLinksProps> = ({ mode, visible }) => {
       <ul>
         {Links.map(({ title, link, tip }) => (
           <li css={EllipsisStyle}>
-            <Tooltip title={tip} placement='right' key={title}>
-              <a target='_blank' href={link}>
+            <Tooltip title={tip} placement="right" key={title}>
+              <a target="_blank" href={link}>
                 {title}
               </a>
             </Tooltip>

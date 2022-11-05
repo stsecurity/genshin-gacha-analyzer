@@ -1,15 +1,15 @@
 /** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react';
-import { FC, useCallback, useState } from 'react';
-import { Button, Upload, Alert, Spin } from 'antd';
-import InboxOutlined from '@ant-design/icons/InboxOutlined';
-import { RcFile } from 'antd/lib/upload';
-import { useGlobalContext } from 'context/GlobalContext';
-import { FriendLinks } from 'components/FriendLinks';
-import { parseExcel, parseJson } from 'parser/index';
-import { compressToHash } from 'utils/compress';
-import { i18n } from 'utils/i18n';
-import { clearGlobalCache } from 'context/CacheContext';
+import { css } from "@emotion/react";
+import { FC, useCallback, useState } from "react";
+import { Button, Upload, Alert, Spin } from "antd";
+import InboxOutlined from "@ant-design/icons/InboxOutlined";
+import { RcFile } from "antd/lib/upload";
+import { useGlobalContext } from "context/GlobalContext";
+import { FriendLinks } from "components/FriendLinks";
+import { parseExcel, parseJson } from "parser/index";
+import { compressToHash } from "utils/compress";
+import { i18n } from "utils/i18n";
+import { clearGlobalCache } from "context/CacheContext";
 
 const { Dragger } = Upload;
 type LoadPageProps = {
@@ -21,17 +21,17 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
   const [errorMessage, setErrorMessage] = useState<String | null>(null);
   const { updateParsedData, updatePage } = useGlobalContext();
   const handleUpload = useCallback((file: RcFile) => {
-    const isXlsx = file.name.endsWith('.xlsx');
-    const isJson = file.name.endsWith('.json');
+    const isXlsx = file.name.endsWith(".xlsx");
+    const isJson = file.name.endsWith(".json");
     if (!isXlsx && !isJson) {
-      setErrorMessage('文件类型错误，请上传 xlsx 文件或 json 文件');
+      setErrorMessage("文件类型错误，请上传 xlsx 文件或 json 文件");
       return false;
     }
 
     const handleError = (error: any) => {
       setLoading(false);
-      if (typeof error === 'string') return setErrorMessage(error);
-      if (typeof error === 'object' && 'message' in error) {
+      if (typeof error === "string") return setErrorMessage(error);
+      if (typeof error === "object" && "message" in error) {
         return setErrorMessage(error.message);
       }
     };
@@ -47,7 +47,7 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
           clearGlobalCache();
           updateParsedData(parsedData);
           compressToHash(parsedData);
-          updatePage('show');
+          updatePage("show");
         })
         .catch(handleError);
     } else if (isXlsx) {
@@ -59,7 +59,7 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
               clearGlobalCache();
               updateParsedData(parsedData);
               compressToHash(parsedData);
-              updatePage('show');
+              updatePage("show");
             })
             .catch(handleError);
         })
@@ -69,7 +69,7 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
     return false;
   }, []);
   const handleGoToMergePage = useCallback(() => {
-    updatePage('merge');
+    updatePage("merge");
   }, []);
   return (
     <div
@@ -78,7 +78,7 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
       `}
     >
       <div
-        className='ant-alert-info'
+        className="ant-alert-info"
         css={css`
           width: 100%;
           display: flex;
@@ -92,26 +92,26 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
             <>
               <div>
                 不知道如何获取抽卡记录导出文件？
-                <a href='https://voderl.cn/js/genshin/' target='_blank'>
-                  <Button type='link'>请点击这里</Button>
+                <a href="https://voderl.cn/js/genshin/" target="_blank">
+                  <Button type="link">请点击这里</Button>
                 </a>
               </div>
               <div>
                 合并多个抽卡记录文件
-                <Button type='link' onClick={handleGoToMergePage}>
+                <Button type="link" onClick={handleGoToMergePage}>
                   请点击这里
                 </Button>
               </div>
             </>
           }
-          type='info'
+          type="info"
           showIcon={false}
           banner
         />
       </div>
       <Dragger
-        name='file'
-        accept='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx, .json'
+        name="file"
+        accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, .xlsx, .json"
         multiple={false}
         beforeUpload={handleUpload}
         showUploadList={false}
@@ -122,12 +122,14 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
           padding: 40px;
         `}
       >
-        {errorMessage && <Alert message={errorMessage} type='error' />}
-        <p className='ant-upload-drag-icon'>
+        {errorMessage && <Alert message={errorMessage} type="error" />}
+        <p className="ant-upload-drag-icon">
           {loading ? <Spin tip={i18n`数据正在解析中...`} /> : <InboxOutlined />}
         </p>
-        <p className='ant-upload-text'>点击选择抽卡记录导出文件或将文件拖拽到此区域</p>
-        <p className='ant-upload-text'>( 注：文件的后缀应为 .xlsx 或 .json )</p>
+        <p className="ant-upload-text">
+          点击选择抽卡记录导出文件或将文件拖拽到此区域
+        </p>
+        <p className="ant-upload-text">( 注：文件的后缀应为 .xlsx 或 .json )</p>
       </Dragger>
       <Alert
         css={css`
@@ -139,18 +141,18 @@ export const LoadPage: FC<LoadPageProps> = function ({ onLoad }) {
           <div>
             此网站是静态网站，你的文件不会被上传到网站后台，具体代码请查看
             <Button
-              type='link'
-              href='https://github.com/voderl/genshin-gacha-analyzer'
-              target='_blank'
+              type="link"
+              href="https://github.com/stsecurity/genshin-gacha-analyzer"
+              target="_blank"
             >
               github链接
             </Button>
           </div>
         }
-        type='warning'
+        type="warning"
         showIcon
       />
-      <FriendLinks mode='bottom' visible />
+      <FriendLinks mode="bottom" visible />
     </div>
   );
 };
